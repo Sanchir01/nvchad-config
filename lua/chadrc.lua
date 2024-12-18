@@ -5,7 +5,7 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.base46 = {
+M.ui = {
     theme = "kanagava",
 	transparency= true,
     nvdash = {
@@ -21,10 +21,22 @@ M.base46 = {
         "             Welcome, Sanchir!                        "
     },
 	},
-	hl_override = {
-		Comment = { italic = true },
-		["@comment"] = { italic = true },
+	 hl_override = {
+    Comment = { italic = true },
+    ["@comment"] = { italic = true },
+    DiffChange = {
+      bg = "#464414",
+      fg = "none",
     },
+    DiffAdd = {
+      bg = "#103507",
+      fg = "none",
+    },
+    DiffRemoved = {
+      bg = "#461414",
+      fg = "none",
+    },
+  },
 	
 }
 
