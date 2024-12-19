@@ -24,4 +24,38 @@ map("n", "<leader>qq", "<cmd>TroubleToggle quickfix<CR>", { desc = "Open Quickfi
 map("n", "<leader>ql", "<cmd>TroubleToggle loclist<CR>", { desc = "Open Location List" })
 map("n", "<leader>qt", "<cmd>TodoTrouble<CR>", { desc = "Open Todo Trouble" })
 
+-- Terminal
+map("n", "<C-]>", function()
+  require("nvchad.term").toggle { pos = "vsp", size = 0.4 }
+end, { desc = "Toogle Terminal Vertical" })
+map("n", "<C-\\>", function()
+  require("nvchad.term").toggle { pos = "sp", size = 0.4 }
+end, { desc = "Toogle Terminal Horizontal" })
+map("n", "<C-f>", function()
+  require("nvchad.term").toggle { pos = "float" }
+end, { desc = "Toogle Terminal Float" })
+map("t", "<C-]>", function()
+  require("nvchad.term").toggle { pos = "vsp" }
+end, { desc = "Toogle Terminal Vertical" })
+map("t", "<C-\\>", function()
+  require("nvchad.term").toggle { pos = "sp" }
+end, { desc = "Toogle Terminal Horizontal" })
+map("t", "<C-f>", function()
+  require("nvchad.term").toggle { pos = "float" }
+end, { desc = "Toogle Terminal Float" })
+
+-- Menu
+
+vim.keymap.set("n", "<C-t>", function()
+  require("menu").open("default")
+end, {})
+
+-- mouse users + nvimtree users!
+vim.keymap.set("n", "<RightMouse>", function()
+  vim.cmd.exec '"normal! \\<RightMouse>"'
+
+  local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+  require("menu").open(options, { mouse = true })
+end, {})
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

@@ -21,6 +21,9 @@ M.ui = {
         "             Welcome, Sanchir!                        "
     },
 	},
+   terminal = {
+    shell = "powershell", -- Используйте "powershell" или "pwsh" в зависимости от установленной версии
+  },
 	 hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },

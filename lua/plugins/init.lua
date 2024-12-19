@@ -81,6 +81,8 @@ return {
       require("todo-comments").setup()
     end
   },
+  { "nvzone/volt" , lazy = true },
+  { "nvzone/menu" , lazy = true },
   {
     "rcarriga/nvim-dap-ui",
     config = function()

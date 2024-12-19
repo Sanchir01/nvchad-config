@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
-
+vim.opt.shell = "pwsh"
 -- load plugins
 require("lazy").setup({
   {
