@@ -2,12 +2,14 @@ return {
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",
-    opts = require "configs.conform",
+    config = function()
+      require "configs.conform"
+    end,
   },
-
   {
     "neovim/nvim-lspconfig",
     config = function()
+      require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
   },
@@ -45,16 +47,16 @@ return {
       },
     },
   },
-  {
+ {
     "mfussenegger/nvim-lint",
-    event = "Verylazy",
+    event = "VeryLazy",
     config = function()
-      require "config.lint"
+      require "configs.lint"
     end,
   },
-  {
+   {
     "windwp/nvim-ts-autotag",
-    event = "Verylazy",
+    event = "VeryLazy",
     config = function()
       require("nvim-ts-autotag").setup()
     end,
@@ -76,7 +78,7 @@ return {
     dependencies={"nvim-lua/plenary.nvim"},
     lazy = false,
     config = function()
-      require("todo-comment").setup()
+      require("todo-comments").setup()
     end
   },
   {
