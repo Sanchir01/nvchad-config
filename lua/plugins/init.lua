@@ -16,7 +16,8 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = {
+    ensure_installed = {
+        "graphql-language-service-cli",
         "lua-language-server",
         "stylua",
         "html-lsp",
@@ -32,9 +33,17 @@ return {
     },
   },
   {
+    "simrat39/rust-tools.nvim",
+    config = function()
+      require("rust-tools").setup({})
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = {
+            ensure_installed = {
+        "graphql",
+        "rust",
         "vim",
         "lua",
         "vimdoc",
@@ -45,6 +54,9 @@ return {
         "go",
         "vue",
       },
+      highlight = {
+      enable = true, 
+    },
     },
   },
  {

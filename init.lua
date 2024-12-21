@@ -1,7 +1,7 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
--- bootstrap lazy and all plugins
+
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 if not vim.uv.fs_stat(lazypath) then
@@ -31,6 +31,32 @@ dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
 require "nvchad.autocmds"
+
+--NvChad tree options
+require("nvim-tree").setup {
+  view = {
+    adaptive_size = true, -- Включает адаптивную ширину
+    side = "left", -- Укажите сторону (left или right)
+    width = 30, -- Минимальная ширина
+  },
+  renderer = {
+    highlight_git = true, -- Подсветка git-изменений
+    icons = {
+      show = {
+        git = true,
+        folder = true,
+        file = true,
+        folder_arrow = true,
+      },
+    },
+  },
+  git = {
+    enable = true, -- Включение интеграции с git
+  },
+  filters = {
+    dotfiles = false, -- Скрытие/показ скрытых файлов
+  },
+}
 
 vim.schedule(function()
   require "mappings"
