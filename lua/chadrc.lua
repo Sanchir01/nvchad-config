@@ -4,7 +4,6 @@ local M = {}
 M.ui = {
     theme = "kanagava",
     transparency = true,
-    load_on_startup = true,
     nvdash = {
         load_on_startup = true,
         header = {
