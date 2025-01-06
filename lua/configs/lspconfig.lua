@@ -4,7 +4,19 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls" ,"prismals","vue", "graphql"}
+local servers = {
+  "html",
+  "cssls",
+  "ts_ls",
+  "clangd",
+  "gopls",
+  "gradle_ls",
+  "prismals",
+  "vue",
+  "graphql",
+  "rust_analyzer",
+  "emmet_ls",
+}
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -16,19 +28,23 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-
-lspconfig.ts_ls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+lspconfig.rust_analyzer.setup {
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+      },
+      checkOnSave = {
+        command = "clippy", -- Проверка кода на лету
+      },
+    },
+  },
 }
-local function organize_imports()
-end
--- Специфичная настройка для Volar (Vue.js)
+
 lspconfig.volar.setup {
   on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities,
-  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+  filetypes = { "vue" },
   init_options = {
     vue = {
       hybridMode = false,
@@ -36,45 +52,24 @@ lspconfig.volar.setup {
   },
 }
 
--- Специфичная настройка для Prisma
-lspconfig.prismals.setup {
-  on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities,
+-- Специфичная настройка для GraphQL
+
+lspconfig.gopls.setup {
+  settings = {
+    gopls = {
+      completeUnimported = true,
+      usePlaceholders = true,
+      analyses = {
+        unusedparams = true,
+      },
+    },
+  },
 }
 
--- Специфичная настройка для GraphQL
-lspconfig.graphql.setup {
-  on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities,
+lspconfig.prismals.setup {
+  filetypes = { "prisma" },
+  on_attach = function(client, bufnr)
+  print("Prisma LSP attached")
+  end,
 }
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    commands = {
-      OrganizeImports = {
-        organize_imports,
-        description = "Organize Imports",
-      },
-    },
-    settings = {
-      gopls = {
-        completeUnimported = true,
-        usePlaceholders = true,
-        analyses = {
-          unusedparams = true,
-        },
-      },
-    },
-  }
-  lspconfig.prismals.setup {}
-  lspconfig.volar.setup {
-    on_attach = on_attach,
-    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-    init_options = {
-      vue = {
-        hybridMode = false,
-      },
-    },
-  }
-end
+

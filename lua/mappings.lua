@@ -69,5 +69,10 @@ vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end,{
 
 
 -- Windows
+
+
 map("n", "\\", "<cmd>vsplit<CR>", { desc = "vertical split window" })
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+
+-- Сохранение
+map({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })

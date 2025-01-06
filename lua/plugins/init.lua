@@ -14,18 +14,18 @@ return {
     end,
   },
   {
-  "folke/persistence.nvim",
-  event = "BufReadPre", -- this will only start session saving when an actual file was opened
-  opts = {
-    dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
-    need = 1,
-    branch = true,
-    }
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {
+      dir = vim.fn.stdpath "state" .. "/sessions/", -- directory where session files are saved
+      need = 1,
+      branch = true,
+    },
   },
   {
     "williamboman/mason.nvim",
     opts = {
-    ensure_installed = {
+      ensure_installed = {
         "graphql-language-service-cli",
         "lua-language-server",
         "stylua",
@@ -44,15 +44,16 @@ return {
   {
     "simrat39/rust-tools.nvim",
     config = function()
-      require("rust-tools").setup({})
+      require("rust-tools").setup {}
     end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-            ensure_installed = {
+      ensure_installed = {
         "graphql",
         "rust",
+        "prisma",
         "vim",
         "lua",
         "vimdoc",
@@ -60,22 +61,23 @@ return {
         "css",
         "javascript",
         "typescript",
+        "tsx",
         "go",
         "vue",
       },
       highlight = {
-      enable = true, 
-    },
+        enable = true,
+      },
     },
   },
- {
+  {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
     config = function()
       require "configs.lint"
     end,
   },
-   {
+  {
     "windwp/nvim-ts-autotag",
     event = "VeryLazy",
     config = function()
@@ -96,15 +98,15 @@ return {
   },
   {
     "folke/todo-comments.nvim",
-    dependencies={"nvim-lua/plenary.nvim"},
+    dependencies = { "nvim-lua/plenary.nvim" },
     lazy = false,
     config = function()
       require("todo-comments").setup()
-      require("configs.todo")
-    end
+      require "configs.todo"
+    end,
   },
-  { "nvzone/volt" , lazy = true },
-  { "nvzone/menu" , lazy = true },
+  { "nvzone/volt", lazy = true },
+  { "nvzone/menu", lazy = true },
   {
     "rcarriga/nvim-dap-ui",
     config = function()
@@ -127,4 +129,3 @@ return {
     },
   },
 }
-
